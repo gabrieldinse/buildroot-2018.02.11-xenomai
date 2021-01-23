@@ -4,7 +4,7 @@ CFLAGS := $(shell DESTDIR=$(STAGE) $(XENO_CONFIG) --rtdm --skin=alchemy --cflags
 LDFLAGS := $(shell DESTDIR=$(STAGE) $(XENO_CONFIG) --rtdm --skin=alchemy --ldflags)
 CC := $(shell DESTDIR=$(STAGE) $(XENO_CONFIG) --cc)
 
-EXECUTABLE := hello_task hello_task2
+EXECUTABLE := multi_task multi_task2
 
 
 all: $(EXECUTABLE)

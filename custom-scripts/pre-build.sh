@@ -1,5 +1,5 @@
 #!/bin/bash
-  
+
 cp $BASE_DIR/../custom-scripts/S41network-config $BASE_DIR/target/etc/init.d
 chmod +x $BASE_DIR/target/etc/init.d/S41network-config
 
@@ -30,6 +30,10 @@ cp  $BASE_DIR/../custom-scripts/spi_test/xen_spi $BASE_DIR/target/usr/xenomai/bi
 
 make -C $BASE_DIR/../custom-scripts/hello_task
 cp  $BASE_DIR/../custom-scripts/hello_task/hello_task $BASE_DIR/target/usr/xenomai/bin
+
+make -C $BASE_DIR/../custom-scripts/multi_task
+cp  $BASE_DIR/../custom-scripts/multi_task/multi_task $BASE_DIR/target/usr/xenomai/bin
+
 
 #FIXME: This entry will repeat at each recompilation.
 echo -e >> $BASE_DIR/target/etc/profile
