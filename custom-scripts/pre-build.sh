@@ -34,6 +34,9 @@ cp  $BASE_DIR/../custom-scripts/hello_task/hello_task $BASE_DIR/target/usr/xenom
 make -C $BASE_DIR/../custom-scripts/multi_task
 cp  $BASE_DIR/../custom-scripts/multi_task/multi_task $BASE_DIR/target/usr/xenomai/bin
 
+make -C $BASE_DIR/../custom-scripts/semaphore
+cp  $BASE_DIR/../custom-scripts/semaphore/sem_no_sync $BASE_DIR/target/usr/xenomai/bin
+
 
 #FIXME: This entry will repeat at each recompilation.
 echo -e >> $BASE_DIR/target/etc/profile
