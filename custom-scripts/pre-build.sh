@@ -56,6 +56,12 @@ cp  $BASE_DIR/../custom-scripts/gpio_led/gpio_led2 $BASE_DIR/target/usr/xenomai/
 cp  $BASE_DIR/../custom-scripts/gpio_led/gpio_led_button $BASE_DIR/target/usr/xenomai/bin
 c
 
+make -C $BASE_DIR/../custom-scripts/jitter_and_latency
+cp  $BASE_DIR/../custom-scripts/jitter_and_latency/jitter_and_latency $BASE_DIR/target/usr/xenomai/bin
+cp  $BASE_DIR/../custom-scripts/jitter_and_latency/jitter_and_latency2 $BASE_DIR/target/usr/xenomai/bin
+cp  $BASE_DIR/../custom-scripts/jitter_and_latency/jitter_and_latency_no_worker $BASE_DIR/target/usr/xenomai/bin
+
+
 #FIXME: This entry will repeat at each recompilation.
 echo -e >> $BASE_DIR/target/etc/profile
 echo -e "export LD_LIBRARY_PATH=/usr/xenomai/lib" >> $BASE_DIR/target/etc/profile
