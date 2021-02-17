@@ -15,11 +15,9 @@ RTIME times_interrupt[NUM_SAMPLES];
 
 RT_SEM sem;
 
-#define NTASKS 3
-
 int pin22, pin24;
 int value22 = 0;
-int value23;
+int value24;
 
 
 void blink_led(void *arg)
@@ -29,21 +27,12 @@ void blink_led(void *arg)
     rt_task_inquire(NULL, &taskinfo);
     printf("Executing task: %s\n", taskinfo.name);
 
-
     rt_task_set_periodic(NULL, TM_NOW, 500 * usec);
 
     for (i = 0; i < NUM_SAMPLES; ++i)
     {
         value22 = 1;
-        // Should register the time before setting led to HIGH,
-        // because the interruption handler in "led_interrupt"
-        // can be executed before the time registering. The
-        // following two lines could cause time difference to be
-        // negative:
-        // 
-        // ret = write(pin22, &value22, sizeof(value22));
-        // times_blink[i] = rt_timer_read();
-        times_blink[i] = rt_timer_read() / 1000;
+        times_blink[i] = rt_timer_read();
         ret = write(pin22, &value22, sizeof(value22));
         rt_task_sleep(250 * usec);
         value22 = 0;
@@ -63,7 +52,7 @@ void led_interrupt(void *arg)
     for (i = 0; i < NUM_SAMPLES; ++i)
     {
         ret = read(pin24, &value24, sizeof(value24));
-        times_interrupt[i] = rt_timer_read() / 1000;
+        times_interrupt[i] = rt_timer_read();
     }
     rt_sem_v(&sem);
 }
@@ -98,7 +87,8 @@ void create_time_diffs_csv(char * filename, RTIME number_of_values,
     RTIME n=0;
     FILE *file;
     file = fopen(filename,"w");
-    while (n<number_of_values) {
+    while (n < number_of_values)
+    {
        fprintf(file,"%u,%llu\n",n,time_values[n]);
        n++;
     } 
